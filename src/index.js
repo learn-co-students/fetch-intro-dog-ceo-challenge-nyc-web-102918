@@ -69,21 +69,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       breedDropdown.addEventListener('change', function functionName(e) {
         const optionValue = e.target.value
-        if (optionValue != "breed-filter") {
-          if (optionValue === "all") {
-            fetchAllBreeds()
-          } else {
-            breedQuery(optionValue)
-          }
+
+        if (optionValue === "all") {
+          fetchAllBreeds()
+        } else {
+          breedQuery(optionValue)
         }
-
-
-
       })
-
-
-
-
-
 
 })
