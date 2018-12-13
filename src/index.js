@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return parsed.message
     })
     .then(imageUrls => {
-      imageUrls.forEach((imageUrl) => {
+      imageUrls.forEach(imageUrl => {
         const image = document.createElement("img")
         image.src = imageUrl
         imageContainer.appendChild(image)
@@ -48,6 +48,40 @@ document.addEventListener('DOMContentLoaded', () => {
       })
 
       // Challenge 4
+
+      //create dropdowns for every letter associated with breed
+      function makeLetterOptions() {
+        const firstLetters = []
+
+        fetch("https://dog.ceo/api/breeds/list/all")
+          .then(response => {
+            return response.json()
+          })
+          .then(parsed => {
+            return Object.keys(parsed.message)
+          })
+          .then(breeds => {
+            // const allFirstLetters = breeds.map(breed => {
+            //   return breed[0]
+            // })
+            breeds.map(breed => {
+              if (!firstLetters.includes(breed[0])) {
+                firstLetters.push(breed[0])
+                return breed[0]
+              }
+
+            })
+
+            firstLetters.forEach(letter => {
+              const option = document.createElement("option")
+              option.textContent = letter
+              option.value = letter
+              breedDropdown.appendChild(option)
+            })
+          })
+      }
+      makeLetterOptions()
+
       function breedQuery(letter) {
         fetch("https://dog.ceo/api/breeds/list/all")
           .then(response => {
@@ -64,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
               item.innerHTML = breed
               breedList.appendChild(item)
             })
+
           })
       }
 
